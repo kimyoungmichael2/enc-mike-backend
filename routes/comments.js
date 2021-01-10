@@ -22,10 +22,11 @@ router.route('/add').post((req, res) => {
 });
 
 //below routes are probably not going to be used (get specific comment, delete specific comment, update specific comment)
+//but I added them anyway; they were in the tutorial I followed so whatever. 
 
 router.route('/:id').get((req, res) => {
     Comment.findById(req.params.id)
-        .then(comment => res.json(exercise))
+        .then(comment => res.json(comment))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -41,8 +42,8 @@ router.route('/update/:id').post((req, res) => {
             comment.comment = req.body.comment;
             comment.username = req.body.username;
 
-            exercise.save()
-                .then(() => res.json('Exerciser updated!'))
+            comment.save()
+                .then(() => res.json('Comment updated!'))
                 .catch(err => res.status(400).json('Error: ' + err));
         })
         .catch(err => res.status(400).json('Error: ' + err));
